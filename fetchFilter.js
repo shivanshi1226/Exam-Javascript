@@ -24,7 +24,22 @@ let showData = (data) => {
         title.textContent = `title: ${ele.title}`;
         let userId = document.createElement("p");
         userId.textContent = `userId: ${ele.userId}`;
-        div.append(body,id,title,userId);
+        let btn = document.createElement("button");
+        btn.textContent = "Delete"
+        btn.addEventListener("click", function(){
+            deletedata(ele.id);
+        })
+        div.append(body,id,title,userId,btn);
         container.append(div);
     })
+}
+
+async function deletedata(id){
+    try{
+        let res = await fetch(`${url}/${id}`,{
+            method:"DELETE"
+        })
+    }catch(error){
+        console.log(error)
+    }
 }
